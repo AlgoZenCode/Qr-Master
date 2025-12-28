@@ -1,0 +1,2066 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="https://schema.org/WebApplication">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>QR Code Generator | CodeMaster Tools</title>
+    <meta name="description" content="Professional QR code generator with masculine design, custom colors, gradients, shapes, and logo upload for business and personal use.">
+    <meta name="keywords" content="QR code generator, create QR code, custom QR code, business QR code, free QR code, professional QR code">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="QR Code Generator | CodeMaster Tools">
+    <meta property="og:description" content="Professional QR code generator with masculine design for business and personal use">
+    <link rel="canonical" href="https://codemastertools.in/qr-generator.html">
+    
+    <!-- Schema.org markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "CodeMaster - QR Code Generator",
+        "description": "Professional QR code generator with masculine design for business and personal use",
+        "url": "https://codemastertools.in/qr-generator.html",
+        "applicationCategory": "UtilityApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "permissions": "none",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "CodeMaster Tools",
+            "url": "https://codemastertools.in"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "CodeMaster Tools",
+            "url": "https://codemastertools.in",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://codemastertools.in/logo.png",
+                "width": "200",
+                "height": "60"
+            }
+        },
+        "screenshot": "https://codemastertools.in/screenshot-qr-generator.jpg",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://codemastertools.in/qr-generator.html"
+        }
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://codemastertools.in"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Tools",
+                "item": "https://codemastertools.in/tools"
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "QR Code Generator",
+                "item": "https://codemastertools.in/qr-generator.html"
+            }
+        ]
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What types of QR codes can I create?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "You can create QR codes for URLs, text, contact information, WiFi credentials, and more with professional styling options."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Can I add my business logo to the QR code?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes! You can upload your company logo and customize its size to create branded QR codes for your business."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What customization options are available?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "You can customize dot styles, corner styles, colors (solid or gradient), background colors, and add professional gradients."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Is this QR code generator completely free?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, our QR code generator is completely free with no limitations on usage or downloads."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What file formats can I download my QR code in?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "You can download your QR codes as high-resolution PNG images suitable for both digital and print use."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Do the QR codes work with all scanners?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, all generated QR codes are fully compliant with QR code standards and work with any standard QR code scanner."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <script src="https://unpkg.com/qr-code-styling@1.6.0-rc.1/lib/qr-code-styling.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #1e40af;
+            --accent: #3b82f6;
+            --dark: #0f172a;
+            --darker: #020617;
+            --light: #f8fafc;
+            --gray: #334155;
+            --glass-bg: rgba(30, 41, 59, 0.7);
+            --glass-border: rgba(100, 116, 139, 0.3);
+            --error: #ef4444;
+            --success: #10b981;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--darker), var(--dark));
+            background-attachment: fixed;
+            color: var(--light);
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Glassmorphism Effect */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            position: relative;
+            z-index: 10;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .logo {
+            font-size: clamp(24px, 5vw, 28px);
+            font-weight: 800;
+            background: linear-gradient(to right, var(--accent), #60a5fa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            flex-shrink: 0;
+            letter-spacing: -0.5px;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: clamp(26px, 5vw, 32px);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: clamp(15px, 3vw, 25px);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        nav a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 600;
+            position: relative;
+            padding: 5px 0;
+            font-size: clamp(14px, 2vw, 16px);
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover {
+            color: var(--accent);
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding: clamp(40px, 8vw, 60px) 0;
+            text-align: center;
+        }
+        
+        .tool-title {
+            font-size: clamp(32px, 6vw, 42px);
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--light), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+        
+        .tool-description {
+            font-size: clamp(16px, 3vw, 18px);
+            color: #cbd5e1;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+        
+        /* Main Card */
+        .main-card {
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .content-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        @media (max-width: 992px) {
+            .content-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .settings-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .settings-group {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .group-title {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+        
+        .group-title i {
+            font-size: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 10px;
+            color: #e2e8f0;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            color: white;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: rgba(59, 130, 246, 0.15);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23e2e8f0' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 16px;
+            padding-right: 40px;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+        }
+        
+        .checkbox-label {
+            margin-left: 10px;
+            color: #cbd5e1;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--accent);
+            cursor: pointer;
+        }
+        
+        .range-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .range-value {
+            font-size: 14px;
+            color: #cbd5e1;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .range-control {
+            width: 100%;
+            -webkit-appearance: none;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            outline: none;
+        }
+        
+        .range-control::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--accent);
+            cursor: pointer;
+            border: 2px solid var(--dark);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .range-control::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--accent);
+            cursor: pointer;
+            border: 2px solid var(--dark);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .color-picker-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .color-picker {
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background: transparent;
+            flex-shrink: 0;
+        }
+        
+        .color-picker::-webkit-color-swatch {
+            border-radius: 8px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .color-picker::-moz-color-swatch {
+            border-radius: 8px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .color-stops-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+        
+        .color-stop {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .color-stop input[type="color"] {
+             width: 40px;
+             height: 40px;
+        }
+        
+        .color-percentage {
+            color: #94a3b8;
+            font-size: 13px;
+            font-weight: 600;
+            min-width: 40px;
+            text-align: center;
+        }
+        
+        .color-stop-remove {
+            background: none;
+            border: none;
+            color: var(--error);
+            cursor: pointer;
+            font-size: 20px;
+            padding: 5px;
+            transition: transform 0.2s;
+        }
+        
+        .color-stop-remove:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Button Styles */
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 14px 28px;
+            border-radius: 10px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #1d4ed8, var(--primary));
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .preview-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            min-height: 450px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .qr-preview {
+            width: 280px;
+            height: 280px;
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        #qrcode {
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        #qrcode canvas, #qrcode svg {
+            width: 100% !important;
+            height: 100% !important;
+        }
+        
+        .preview-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: clamp(40px, 6vw, 60px) 0 clamp(20px, 4vw, 30px);
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Floating CTA Button Animation */
+        .floating-cta {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: linear-gradient(135deg, var(--accent), #3b82f6);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s ease;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-15px);}
+            60% {transform: translateY(-7px);}
+        }
+        
+        /* Wave animation for floating CTA */
+        .wave-circle {
+            position: absolute;
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            opacity: 0;
+            animation: wave 2s infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes wave {
+            0% {
+                transform: scale(0.5);
+                opacity: 0.7;
+            }
+            100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+        
+        .floating-cta:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            animation: none;
+        }
+        
+        /* Features Section */
+        .features-section{
+            background: rgba(0, 0, 0, 0.2);
+            padding: clamp(40px, 6vw, 60px) 0 clamp(20px, 4vw, 30px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 36px;
+            position: relative;
+            display: inline-block;
+            font-weight: 800;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            padding: 0 10px;
+        }
+        
+        .feature-card {
+            padding: 25px;
+            display: flex;
+            gap: 20px;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .feature-card.scroll-visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+        
+        .feature-icon {
+            font-size: 40px;
+            color: var(--accent);
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+            width: 60px;
+            height: 60px;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: rotate(5deg) scale(1.1);
+            background: rgba(59, 130, 246, 0.2);
+        }
+        
+        .feature-content h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--light);
+            font-weight: 700;
+        }
+        
+        .feature-content p {
+            color: #cbd5e1;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+        
+        /* Ad Containers */
+        .ad-container {
+            width: 100%;
+            margin: 30px 0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        /* Footer Content */
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+            padding: 0 15px;
+            text-align: left;
+            justify-content: flex-start;
+            margin-left: 0;
+            margin-right: auto;
+        }
+        
+        .footer-column {
+            text-align: left;
+        }
+        
+        .footer-column h3 {
+            color: var(--accent);
+            margin-bottom: 20px;
+            font-size: 18px;
+            position: relative;
+            display: inline-block;
+            font-weight: 700;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        .footer-column:hover h3::after {
+            width: 100%;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .footer-column li {
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-column li:hover {
+            transform: translateX(5px);
+        }
+        
+        .footer-column a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 15px;
+            display: block;
+            position: relative;
+            padding-left: 0;
+            cursor: pointer;
+        }
+        
+        .footer-column a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+            justify-content: flex-start;
+        }
+        
+        .social-links a {
+            color: var(--light);
+            font-size: 18px;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .social-links a:hover {
+            color: var(--accent);
+            transform: translateY(-3px);
+            background: rgba(59, 130, 246, 0.2);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
+            font-size: 14px;
+            padding: 0 15px;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .main-card {
+                padding: 25px;
+            }
+            
+            .qr-preview {
+                width: 250px;
+                height: 250px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .tool-title {
+                font-size: 28px;
+            }
+            
+            .tool-description {
+                font-size: 16px;
+            }
+            
+            .main-card {
+                padding: 20px;
+            }
+            
+            .btn {
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+            
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+            
+            .feature-card {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .feature-icon {
+                margin: 0 auto;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .tool-title {
+                font-size: 24px;
+            }
+            
+            .btn-group {
+                gap: 10px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .qr-preview {
+                width: 220px;
+                height: 220px;
+            }
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Utility Classes */
+        .badge {
+            background: var(--accent);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+        
+        /* QR Type Selector */
+        .qr-type-selector {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .qr-type-btn {
+            padding: 10px 5px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .qr-type-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .qr-type-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+    </style>
+</head>
+<body itemscope itemtype="https://schema.org/WebPage">
+    <div class="container">
+        <!-- Header with Navigation -->
+        <header>
+            <a href="https://codemastertools.in/" class="logo" itemprop="url">
+                <i class="fas fa-qrcode"></i>
+                <span itemprop="name">CodeMaster</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="https://codemastertools.in/" itemprop="url">Home</a></li>
+                    <li><a href="#features" itemprop="url">Features</a></li>
+                    <li><a href="#how-it-works" itemprop="url">How It Works</a></li>
+                    <li><a href="#contact" itemprop="url">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1 class="tool-title animate__animated animate__fadeInDown" itemprop="headline">Professional QR Code Generator</h1>
+            <p class="tool-description animate__animated animate__fadeInDown animate__delay-1s" itemprop="description">
+                Create custom QR codes for business and personal use with advanced styling options including colors, gradients, shapes, and logo upload.
+            </p>
+            
+            <!-- Ad Container (Top) -->
+            <div class="ad-container animate__animated animate__fadeIn animate__delay-2s">
+                <div style="color: rgba(255,255,255,0.5);">Advertisement</div>
+            </div>
+            
+            <!-- QR Code Generator Tool -->
+            <div class="main-card glass-card animate__animated animate__fadeIn animate__delay-3s" id="mainToolCard" itemprop="mainEntity" itemscope itemtype="https://schema.org/SoftwareApplication">
+                <meta itemprop="applicationCategory" content="UtilityApplication">
+                <meta itemprop="operatingSystem" content="Any">
+                <meta itemprop="name" content="CodeMaster QR Code Generator">
+                <meta itemprop="description" content="Professional QR code generator with masculine design for business and personal use">
+                <meta itemprop="url" content="https://codemastertools.in/qr-generator.html">
+                <meta itemprop="softwareVersion" content="1.0">
+                <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <meta itemprop="price" content="0">
+                    <meta itemprop="priceCurrency" content="USD">
+                </div>
+                
+                <div class="content-container">
+                    <div class="settings-container">
+                        <div class="settings-group">
+                            <h4 class="group-title"><i class="fas fa-edit"></i> QR Code Content</h4>
+                            <div class="form-group">
+                                <div class="form-label">QR Code Type</div>
+                                <div class="qr-type-selector">
+                                    <button class="qr-type-btn active" data-type="url">
+                                        <i class="fas fa-link"></i>
+                                        <span>URL</span>
+                                    </button>
+                                    <button class="qr-type-btn" data-type="text">
+                                        <i class="fas fa-text-height"></i>
+                                        <span>Text</span>
+                                    </button>
+                                    <button class="qr-type-btn" data-type="wifi">
+                                        <i class="fas fa-wifi"></i>
+                                        <span>WiFi</span>
+                                    </button>
+                                    <button class="qr-type-btn" data-type="email">
+                                        <i class="fas fa-envelope"></i>
+                                        <span>Email</span>
+                                    </button>
+                                    <button class="qr-type-btn" data-type="phone">
+                                        <i class="fas fa-phone"></i>
+                                        <span>Phone</span>
+                                    </button>
+                                    <button class="qr-type-btn" data-type="sms">
+                                        <i class="fas fa-sms"></i>
+                                        <span>SMS</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <textarea id="qrText" class="form-control" rows="4" placeholder="Enter URL, text, or data for QR code">https://codemastertools.in</textarea>
+                            </div>
+                            <div class="form-group" id="wifiFields" style="display: none;">
+                                <input type="text" id="wifiSsid" class="form-control" placeholder="WiFi Network Name (SSID)" style="margin-bottom: 10px;">
+                                <input type="password" id="wifiPassword" class="form-control" placeholder="WiFi Password">
+                                <select id="wifiEncryption" class="form-control form-select" style="margin-top: 10px;">
+                                    <option value="WPA">WPA/WPA2</option>
+                                    <option value="WEP">WEP</option>
+                                    <option value="nopass">No Encryption</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="settings-group">
+                            <h4 class="group-title"><i class="fas fa-shapes"></i> Shapes & Style</h4>
+                            <div class="form-group">
+                                <div class="form-label">Dots Style</div>
+                                <select id="dotsStyle" class="form-control form-select">
+                                    <option value="square">Squares</option>
+                                    <option value="dots">Dots</option>
+                                    <option value="rounded" selected>Rounded</option>
+                                    <option value="extra-rounded">Extra Rounded</option>
+                                    <option value="classy">Classy</option>
+                                    <option value="classy-rounded">Classy Rounded</option>
+                                </select>
+                            </div>
+                             <div class="form-group">
+                                <div class="form-label">Corner Eye Style</div>
+                                <select id="cornersSquareStyle" class="form-control form-select">
+                                    <option value="square">Square</option>
+                                    <option value="dot">Dot</option>
+                                    <option value="extra-rounded" selected>Extra Rounded</option>
+                                </select>
+                            </div>
+                             <div class="form-group">
+                                <div class="form-label">Corner Dot Style</div>
+                                <select id="cornersDotStyle" class="form-control form-select">
+                                    <option value="square">Square</option>
+                                    <option value="dot" selected>Dot</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <h4 class="group-title"><i class="fas fa-palette"></i> Colors</h4>
+                            
+                            <div class="form-group">
+                                <div class="form-label">Foreground</div>
+                                <select id="fgType" class="form-control form-select">
+                                    <option value="solid">Solid Color</option>
+                                    <option value="gradient">Gradient</option>
+                                </select>
+                            </div>
+                            <div id="fgSolidColor" class="form-group">
+                                 <div class="color-picker-group">
+                                    <input type="color" id="fgColor" class="color-picker" value="#000000">
+                                    <input type="text" id="fgColorHex" class="form-control" value="#000000" placeholder="#000000">
+                                 </div>
+                            </div>
+                            <div id="fgGradientOptions" class="form-group" style="display: none;">
+                                <div class="color-stops-container" id="fgColorStops"></div>
+                                <button id="addFgColor" class="btn btn-secondary" style="font-size:14px; padding: 8px 15px; margin-top: 10px;"><i class="fas fa-plus"></i> Add Color Stop</button>
+                                 <div class="form-group" style="margin-top:15px;">
+                                    <select id="fgGradientType" class="form-control form-select">
+                                        <option value="linear">Linear</option>
+                                        <option value="radial">Radial</option>
+                                    </select>
+                                 </div>
+                                 <div id="fgGradientAngleContainer" class="range-group">
+                                    <div class="form-label">Angle (<span id="fgGradientAngleValue">0</span>°)</div>
+                                    <input type="range" id="fgGradientAngle" class="range-control" min="0" max="360" value="0">
+                                 </div>
+                            </div>
+
+                             <div class="form-group">
+                                <div class="form-label">Background</div>
+                                <select id="bgType" class="form-control form-select">
+                                    <option value="solid">Solid Color</option>
+                                    <option value="gradient">Gradient</option>
+                                </select>
+                            </div>
+                            <div id="bgSolidColor" class="form-group">
+                                <div class="color-picker-group">
+                                    <input type="color" id="bgColor" class="color-picker" value="#ffffff">
+                                    <input type="text" id="bgColorHex" class="form-control" value="#ffffff" placeholder="#ffffff">
+                                </div>
+                            </div>
+                            <div id="bgGradientOptions" class="form-group" style="display: none;">
+                                <div class="color-stops-container" id="bgColorStops"></div>
+                                <button id="addBgColor" class="btn btn-secondary" style="font-size:14px; padding: 8px 15px; margin-top: 10px;"><i class="fas fa-plus"></i> Add Color Stop</button>
+                                 <div class="form-group" style="margin-top:15px;">
+                                    <select id="bgGradientType" class="form-control form-select">
+                                        <option value="linear">Linear</option>
+                                        <option value="radial">Radial</option>
+                                    </select>
+                                 </div>
+                                  <div id="bgGradientAngleContainer" class="range-group">
+                                    <div class="form-label">Angle (<span id="bgGradientAngleValue">0</span>°)</div>
+                                    <input type="range" id="bgGradientAngle" class="range-control" min="0" max="360" value="0">
+                                 </div>
+                            </div>
+                        </div>
+                        
+                        <div class="settings-group">
+                            <h4 class="group-title"><i class="fas fa-image"></i> Logo</h4>
+                            <div class="form-group">
+                                <div class="form-label">Upload Logo</div>
+                                <input type="file" id="logoUpload" accept="image/*" class="form-control" style="padding: 8px;">
+                            </div>
+                            <div class="form-group">
+                                <div class="form-label">Logo Size (<span id="logoSizeValue">30</span>%)</div>
+                                <input type="range" id="logoSize" class="range-control" min="0.1" max="0.5" step="0.05" value="0.3">
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="removeBackground" checked>
+                                <label for="removeBackground" class="checkbox-label">Remove logo background</label>
+                            </div>
+                        </div>
+                        
+                        <div class="btn-group">
+                            <button class="btn btn-primary" id="downloadBtn">
+                                <i class="fas fa-download"></i> Download PNG
+                            </button>
+                            <button class="btn btn-secondary" id="resetGradientBtn">
+                                <i class="fas fa-redo"></i> Reset Gradient
+                            </button>
+                             <button class="btn btn-secondary" id="resetAllBtn">
+                                <i class="fas fa-undo"></i> Reset All
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="preview-container">
+                        <h4 class="group-title" style="margin-bottom: 20px; justify-content: center;"><i class="fas fa-eye"></i> Preview</h4>
+                        <div class="qr-preview">
+                            <div id="qrcode"></div>
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn btn-primary" id="copyBtn">
+                                <i class="far fa-copy"></i> Copy Color Codes
+                            </button>
+                        </div>
+                        <div style="margin-top: 20px; font-size: 14px; color: #94a3b8; max-width: 300px;">
+                            <i class="fas fa-info-circle" style="margin-right: 8px;"></i>
+                            Scan this QR code with your phone camera
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ad Container (Middle) -->
+            <div class="ad-container">
+                <div style="color: rgba(255,255,255,0.5);">Advertisement</div>
+            </div>
+            
+            <!-- How It Works Section -->
+            <section id="how-it-works" class="features-section" itemscope itemtype="https://schema.org/HowTo">
+                <h2 class="section-title" itemprop="name">How to Create QR Codes</h2>
+                <meta itemprop="description" content="Step-by-step guide on how to create custom QR codes using CodeMaster">
+                <div class="features-grid">
+                    <div class="feature-card glass-card" style="animation-delay: 0.1s" itemprop="step" itemscope itemtype="https://schema.org/HowToStep">
+                        <div class="feature-icon">
+                            <i class="fas fa-edit"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3 itemprop="name">Enter Your Content</h3>
+                            <p itemprop="text">Add your URL, text, WiFi credentials, or any data you want to encode in the QR code.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card glass-card" style="animation-delay: 0.2s" itemprop="step" itemscope itemtype="https://schema.org/HowToStep">
+                        <div class="feature-icon">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3 itemprop="name">Customize Design</h3>
+                            <p itemprop="text">Choose from various dot styles, colors, gradients, and background options for professional look.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card glass-card" style="animation-delay: 0.3s" itemprop="step" itemscope itemtype="https://schema.org/HowToStep">
+                        <div class="feature-icon">
+                            <i class="fas fa-image"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3 itemprop="name">Add Logo (Optional)</h3>
+                            <p itemprop="text">Upload your company logo and adjust its size to create branded QR codes for your business.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card glass-card" style="animation-delay: 0.4s" itemprop="step" itemscope itemtype="https://schema.org/HowToStep">
+                        <div class="feature-icon">
+                            <i class="fas fa-download"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3 itemprop="name">Download & Use</h3>
+                            <p itemprop="text">Download your custom QR code as high-quality PNG and use it anywhere you need.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Features Section -->
+            <section id="features" class="features-section">
+                <h2 class="section-title">Advanced QR Code Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card glass-card" style="animation-delay: 0.1s">
+                        <div class="feature-icon">
+                            <i class="fas fa-shapes"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Multiple Dot Styles</h3>
+                            <p>Choose from squares, dots, rounded, classy, and various corner styles for unique QR codes.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card glass-card" style="animation-delay: 0.2s">
+                        <div class="feature-icon">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Gradient Colors</h3>
+                            <p>Create stunning QR codes with linear and radial gradients for both foreground and background.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card glass-card" style="animation-delay: 0.3s">
+                        <div class="feature-icon">
+                            <i class="fas fa-image"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Logo Integration</h3>
+                            <p>Add your brand logo to the center of QR codes with adjustable size and background removal.</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-card glass-card" style="animation-delay: 0.4s">
+                        <div class="feature-icon">
+                            <i class="fas fa-download"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>High Quality Export</h3>
+                            <p>Download your QR codes as high-resolution PNG files suitable for both digital and print use.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card glass-card" style="animation-delay: 0.5s">
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Real-time Preview</h3>
+                            <p>See your QR code changes instantly as you customize colors, styles, and logos.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card glass-card" style="animation-delay: 0.6s">
+                        <div class="feature-icon">
+                            <i class="fas fa-infinity"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Unlimited Generation</h3>
+                            <p>Create as many QR codes as you need with no limitations or watermarks.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- FAQ Section -->
+            <section class="features-section" itemscope itemtype="https://schema.org/FAQPage">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <div class="features-grid">
+                    <div class="feature-card glass-card" style="animation-delay: 0.1s" itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
+                        <div class="feature-icon">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3 itemprop="name">What types of QR codes can I create?</h3>
+                            <p itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+                                <span itemprop="text">You can create QR codes for URLs, text, contact information, WiFi credentials, and more with professional styling options.</span>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card glass-card" style="animation-delay: 0.2s" itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
+                        <div class="feature-icon">
+                            <i class="fas fa-image"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3 itemprop="name">Can I add my business logo to the QR code?</h3>
+                            <p itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+                                <span itemprop="text">Yes! You can upload your company logo and customize its size to create branded QR codes for your business.</span>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card glass-card" style="animation-delay: 0.3s" itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
+                        <div class="feature-icon">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3 itemprop="name">What customization options are available?</h3>
+                            <p itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+                                <span itemprop="text">You can customize dot styles, corner styles, colors (solid or gradient), background colors, and add professional gradients.</span>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card glass-card" style="animation-delay: 0.4s" itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
+                        <div class="feature-icon">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3 itemprop="name">Is this QR code generator completely free?</h3>
+                            <p itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+                                <span itemprop="text">Yes, our QR code generator is completely free with no limitations on usage or downloads.</span>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card glass-card" style="animation-delay: 0.5s" itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
+                        <div class="feature-icon">
+                            <i class="fas fa-download"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3 itemprop="name">What file formats can I download my QR code in?</h3>
+                            <p itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+                                <span itemprop="text">You can download your QR codes as high-resolution PNG images suitable for both digital and print use.</span>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card glass-card" style="animation-delay: 0.6s" itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
+                        <div class="feature-icon">
+                            <i class="fas fa-qrcode"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3 itemprop="name">Do the QR codes work with all scanners?</h3>
+                            <p itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+                                <span itemprop="text">Yes, all generated QR codes are fully compliant with QR code standards and work with any standard QR code scanner.</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Ad Container (Bottom) -->
+            <div class="ad-container">
+                <div style="color: rgba(255,255,255,0.5);">Advertisement</div>
+            </div>
+        </main>
+        
+        <!-- Footer -->
+        <footer id="contact" class="animate__animated animate__fadeInUp" itemscope itemtype="https://schema.org/WPFooter">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-column">
+                        <h3>Code Tools</h3>
+                        <ul>    
+                            <li><a href="https://codemastertools.in/qr-generator.html" itemprop="url">QR Code Generator</a></li>    
+                            <li><a href="https://codemastertools.in/barcode-generator.html" itemprop="url">Barcode Generator</a></li>    
+                            <li><a href="https://codemastertools.in/base64-converter.html" itemprop="url">Base64 Converter</a></li>    
+                            <li><a href="https://codemastertools.in/json-formatter.html" itemprop="url">JSON Formatter</a></li>    
+                        </ul>    
+                    </div>    
+                    
+                    <div class="footer-column">
+                        <h3>Business Tools</h3>
+                        <ul>
+                            <li><a href="https://codemastertools.in/invoice-generator.html" itemprop="url">Invoice Generator</a></li>
+                            <li><a href="https://codemastertools.in/business-card.html" itemprop="url">Business Card Maker</a></li>
+                            <li><a href="https://codemastertools.in/logo-maker.html" itemprop="url">Logo Maker</a></li>
+                            
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">    
+                        <h3>Company</h3>    
+                        <ul>    
+                            <li><a href="https://codemastertools.in/about.html" itemprop="url">About Us</a></li>    
+                            <li><a href="https://codemastertools.in/privacy.html" itemprop="url">Privacy Policy</a></li>    
+                            <li><a href="https://codemastertools.in/terms.html" itemprop="url">Terms of Service</a></li>    
+                            <li><a href="https://codemastertools.in/contact.html" itemprop="url">Contact Us</a></li>    
+                        </ul>    
+                    </div>    
+                    
+                    <div class="footer-column">    
+                        <h3>Connect With Us</h3>    
+                        <p style="color: #cbd5e1; margin-bottom: 20px;">Follow us for updates and professional tools.</p>
+                        <div class="social-links">
+                            <a href="https://twitter.com/codemastertools" itemprop="url"><i class="fab fa-twitter"></i></a>
+                            <a href="https://linkedin.com/company/codemastertools" itemprop="url"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://github.com/codemastertools" itemprop="url"><i class="fab fa-github"></i></a>
+                            <a href="https://instagram.com/codemastertools" itemprop="url"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="copyright">    
+                    <p>&copy; 2025 <span itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><span itemprop="name">CodeMaster Tools</span></span>. All rights reserved.</p>    
+                </div>    
+            </div>    
+        </footer>
+    </div>
+
+    <!-- Floating CTA Button with Wave Animation -->
+    <div class="floating-cta animate__animated animate__bounceInRight animate__delay-2s" id="floatingCta">
+        <i class="fas fa-qrcode"></i>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const getEl = (id) => document.getElementById(id);
+
+            // --- DOM Elements ---
+            const qrText = getEl('qrText');
+            const dotsStyle = getEl('dotsStyle');
+            const cornersSquareStyle = getEl('cornersSquareStyle');
+            const cornersDotStyle = getEl('cornersDotStyle');
+            
+            // QR Type Elements
+            const qrTypeBtns = document.querySelectorAll('.qr-type-btn');
+            const wifiFields = getEl('wifiFields');
+            const wifiSsid = getEl('wifiSsid');
+            const wifiPassword = getEl('wifiPassword');
+            const wifiEncryption = getEl('wifiEncryption');
+            
+            // Foreground
+            const fgType = getEl('fgType');
+            const fgSolidColor = getEl('fgSolidColor');
+            const fgColor = getEl('fgColor');
+            const fgColorHex = getEl('fgColorHex');
+            const fgGradientOptions = getEl('fgGradientOptions');
+            const fgColorStopsContainer = getEl('fgColorStops');
+            const addFgColorBtn = getEl('addFgColor');
+            const fgGradientType = getEl('fgGradientType');
+            const fgGradientAngleContainer = getEl('fgGradientAngleContainer');
+            const fgGradientAngle = getEl('fgGradientAngle');
+            const fgGradientAngleValue = getEl('fgGradientAngleValue');
+
+            // Background
+            const bgType = getEl('bgType');
+            const bgSolidColor = getEl('bgSolidColor');
+            const bgColor = getEl('bgColor');
+            const bgColorHex = getEl('bgColorHex');
+            const bgGradientOptions = getEl('bgGradientOptions');
+            const bgColorStopsContainer = getEl('bgColorStops');
+            const addBgColorBtn = getEl('addBgColor');
+            const bgGradientType = getEl('bgGradientType');
+            const bgGradientAngleContainer = getEl('bgGradientAngleContainer');
+            const bgGradientAngle = getEl('bgGradientAngle');
+            const bgGradientAngleValue = getEl('bgGradientAngleValue');
+
+            // Logo
+            const logoUpload = getEl('logoUpload');
+            const logoSize = getEl('logoSize');
+            const logoSizeValue = getEl('logoSizeValue');
+            const removeBackground = getEl('removeBackground');
+            
+            // Actions
+            const downloadBtn = getEl('downloadBtn');
+            const resetGradientBtn = getEl('resetGradientBtn');
+            const resetAllBtn = getEl('resetAllBtn');
+            const copyBtn = getEl('copyBtn');
+            const qrcodeDiv = getEl('qrcode');
+            const floatingCta = getEl('floatingCta');
+            
+            let logoImage = null;
+            let currentQRType = 'url';
+
+            // --- QR Code Styling Instance ---
+            const qrCode = new QRCodeStyling({
+                width: 260,
+                height: 260,
+                data: "https://codemastertools.in",
+                image: "",
+                dotsOptions: { color: "#000000", type: "rounded" },
+                backgroundOptions: { color: "#ffffff" },
+                cornersSquareOptions: { type: "extra-rounded" },
+                cornersDotOptions: { type: "dot" },
+                imageOptions: { crossOrigin: "anonymous", margin: 5, imageSize: 0.3 }
+            });
+
+            qrCode.append(qrcodeDiv);
+
+            // --- Color Percentage Update Function ---
+            function updateColorPercentages(container) {
+                const colorStops = container.querySelectorAll('.color-stop');
+                const totalStops = colorStops.length;
+                
+                colorStops.forEach((stop, index) => {
+                    let percentage = 0;
+                    if (totalStops === 1) {
+                        percentage = 100;
+                    } else if (totalStops > 1) {
+                        percentage = Math.round((index / (totalStops - 1)) * 100);
+                    }
+                    
+                    let percentageElement = stop.querySelector('.color-percentage');
+                    if (!percentageElement) {
+                        percentageElement = document.createElement('span');
+                        percentageElement.className = 'color-percentage';
+                        stop.insertBefore(percentageElement, stop.querySelector('.color-stop-remove'));
+                    }
+                    percentageElement.textContent = `${percentage}%`;
+                });
+            }
+
+            // --- Gradient & Color Stop Helpers ---
+            function createColorStop(color, isForeground = true) {
+                const stopDiv = document.createElement('div');
+                stopDiv.className = 'color-stop';
+                
+                const colorInput = document.createElement('input');
+                colorInput.type = 'color';
+                colorInput.className = 'gradient-color';
+                colorInput.value = color;
+                
+                const colorText = document.createElement('input');
+                colorText.type = 'text';
+                colorText.className = 'form-control';
+                colorText.value = color;
+                colorText.style.flex = '1';
+                colorText.style.padding = '8px';
+                colorText.style.fontSize = '14px';
+                colorText.placeholder = isForeground ? '#000000' : '#ffffff';
+                
+                const percentageElement = document.createElement('span');
+                percentageElement.className = 'color-percentage';
+                percentageElement.textContent = '0%';
+                
+                const removeBtn = document.createElement('button');
+                removeBtn.className = 'color-stop-remove';
+                removeBtn.innerHTML = '&times;';
+                removeBtn.title = 'Remove color stop';
+                
+                stopDiv.appendChild(colorInput);
+                stopDiv.appendChild(colorText);
+                stopDiv.appendChild(percentageElement);
+                stopDiv.appendChild(removeBtn);
+
+                removeBtn.addEventListener('click', () => {
+                    stopDiv.remove();
+                    updateColorPercentages(isForeground ? fgColorStopsContainer : bgColorStopsContainer);
+                    updateQRCode();
+                });
+                
+                colorInput.addEventListener('input', function() {
+                    colorText.value = this.value;
+                    updateQRCode();
+                });
+                
+                colorText.addEventListener('input', function() {
+                    if (this.value.match(/^#[0-9A-F]{6}$/i)) {
+                        colorInput.value = this.value;
+                        updateQRCode();
+                    }
+                });
+                
+                return stopDiv;
+            }
+            
+            function addColorStop(container, isForeground = true) {
+                if (container.children.length < 5) {
+                    // Generate a random color based on foreground/background
+                    let newColor;
+                    if (isForeground) {
+                        // Darker colors for foreground
+                        const colors = ['#000000', '#1e293b', '#334155', '#475569', '#0f172a'];
+                        newColor = colors[Math.floor(Math.random() * colors.length)];
+                    } else {
+                        // Lighter colors for background
+                        const colors = ['#ffffff', '#f8fafc', '#f1f5f9', '#e2e8f0', '#cbd5e1'];
+                        newColor = colors[Math.floor(Math.random() * colors.length)];
+                    }
+                    
+                    container.appendChild(createColorStop(newColor, isForeground));
+                    updateColorPercentages(container);
+                    updateQRCode();
+                } else {
+                    alert("Maximum of 5 color stops reached.");
+                }
+            }
+
+            function getColorStops(container) {
+                const stops = [];
+                const children = container.children;
+                for (let i = 0; i < children.length; i++) {
+                    const color = children[i].querySelector('.gradient-color').value;
+                    const offset = children.length === 1 ? 0 : i / (children.length - 1);
+                    stops.push({ offset: offset, color: color });
+                }
+                return stops;
+            }
+
+            // --- Reset Gradient Function ---
+            function resetGradient(isForeground = true) {
+                if (isForeground) {
+                    fgColorStopsContainer.innerHTML = '';
+                    fgColorStopsContainer.appendChild(createColorStop('#000000', true));
+                    fgColorStopsContainer.appendChild(createColorStop('#2563eb', true));
+                    fgGradientType.value = 'linear';
+                    fgGradientAngle.value = 0;
+                    fgGradientAngleValue.textContent = '0';
+                    updateColorPercentages(fgColorStopsContainer);
+                } else {
+                    bgColorStopsContainer.innerHTML = '';
+                    bgColorStopsContainer.appendChild(createColorStop('#ffffff', false));
+                    bgColorStopsContainer.appendChild(createColorStop('#f8fafc', false));
+                    bgGradientType.value = 'linear';
+                    bgGradientAngle.value = 0;
+                    bgGradientAngleValue.textContent = '0';
+                    updateColorPercentages(bgColorStopsContainer);
+                }
+                updateQRCode();
+            }
+
+            // --- QR Type Selection ---
+            qrTypeBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    qrTypeBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentQRType = this.getAttribute('data-type');
+                    
+                    // Update placeholder text based on type
+                    switch(currentQRType) {
+                        case 'url':
+                            qrText.placeholder = "Enter URL (e.g., https://example.com)";
+                            qrText.value = "https://codemastertools.in";
+                            wifiFields.style.display = 'none';
+                            break;
+                        case 'text':
+                            qrText.placeholder = "Enter text or message";
+                            qrText.value = "Hello! This is a QR code message.";
+                            wifiFields.style.display = 'none';
+                            break;
+                        case 'wifi':
+                            qrText.placeholder = "WIFI:T:WPA;S:Network;P:Password;;";
+                            qrText.value = "";
+                            wifiFields.style.display = 'block';
+                            updateWifiQR();
+                            break;
+                        case 'email':
+                            qrText.placeholder = "mailto:example@email.com?subject=Hello&body=Message";
+                            qrText.value = "mailto:contact@codemastertools.in?subject=Hello&body=I%20would%20like%20more%20information";
+                            wifiFields.style.display = 'none';
+                            break;
+                        case 'phone':
+                            qrText.placeholder = "tel:+1234567890";
+                            qrText.value = "tel:+1234567890";
+                            wifiFields.style.display = 'none';
+                            break;
+                        case 'sms':
+                            qrText.placeholder = "sms:+1234567890?body=Hello";
+                            qrText.value = "sms:+1234567890?body=Hello%20there";
+                            wifiFields.style.display = 'none';
+                            break;
+                    }
+                    
+                    updateQRCode();
+                });
+            });
+
+            function updateWifiQR() {
+                const ssid = wifiSsid.value || "MyWiFi";
+                const password = wifiPassword.value || "";
+                const encryption = wifiEncryption.value;
+                
+                let wifiString = `WIFI:T:${encryption};S:${ssid};`;
+                if (password && encryption !== 'nopass') {
+                    wifiString += `P:${password};`;
+                }
+                wifiString += `;`;
+                
+                qrText.value = wifiString;
+                updateQRCode();
+            }
+
+            // WiFi fields event listeners
+            wifiSsid.addEventListener('input', updateWifiQR);
+            wifiPassword.addEventListener('input', updateWifiQR);
+            wifiEncryption.addEventListener('change', updateWifiQR);
+
+            // --- Main Update Function ---
+            function updateQRCode() {
+                const data = qrText.value || "https://codemastertools.in";
+                
+                const options = {
+                    data: data,
+                    dotsOptions: { type: dotsStyle.value },
+                    cornersSquareOptions: { type: cornersSquareStyle.value },
+                    cornersDotOptions: { type: cornersDotStyle.value },
+                    image: logoImage || "",
+                    imageOptions: {
+                        imageSize: parseFloat(logoSize.value),
+                        margin: 5
+                    }
+                };
+
+                // Set Foreground
+                if (fgType.value === 'solid') {
+                    options.dotsOptions.color = fgColor.value;
+                } else {
+                    options.dotsOptions.gradient = {
+                        type: fgGradientType.value,
+                        rotation: parseFloat(fgGradientAngle.value),
+                        colorStops: getColorStops(fgColorStopsContainer)
+                    };
+                }
+
+                // Set Background
+                if (bgType.value === 'solid') {
+                    options.backgroundOptions = { color: bgColor.value };
+                } else {
+                    options.backgroundOptions = {
+                        gradient: {
+                            type: bgGradientType.value,
+                            rotation: parseFloat(bgGradientAngle.value),
+                            colorStops: getColorStops(bgColorStopsContainer)
+                        }
+                    };
+                }
+                
+                qrCode.update(options);
+            }
+
+            // --- Event Listeners ---
+            [qrText, dotsStyle, cornersSquareStyle, cornersDotStyle].forEach(el => {
+                el.addEventListener('input', updateQRCode);
+            });
+
+            // Color inputs with hex fields
+            fgColor.addEventListener('input', function() {
+                fgColorHex.value = this.value;
+                updateQRCode();
+            });
+            
+            fgColorHex.addEventListener('input', function() {
+                if (this.value.match(/^#[0-9A-F]{6}$/i)) {
+                    fgColor.value = this.value;
+                    updateQRCode();
+                }
+            });
+            
+            bgColor.addEventListener('input', function() {
+                bgColorHex.value = this.value;
+                updateQRCode();
+            });
+            
+            bgColorHex.addEventListener('input', function() {
+                if (this.value.match(/^#[0-9A-F]{6}$/i)) {
+                    bgColor.value = this.value;
+                    updateQRCode();
+                }
+            });
+
+            // Foreground Type Change
+            fgType.addEventListener('change', () => {
+                fgSolidColor.style.display = (fgType.value === 'solid') ? 'block' : 'none';
+                fgGradientOptions.style.display = (fgType.value === 'gradient') ? 'block' : 'none';
+                updateQRCode();
+            });
+
+            // Background Type Change
+            bgType.addEventListener('change', () => {
+                bgSolidColor.style.display = (bgType.value === 'solid') ? 'block' : 'none';
+                bgGradientOptions.style.display = (bgType.value === 'gradient') ? 'block' : 'none';
+                updateQRCode();
+            });
+
+            // Gradient Control Events
+            [fgGradientType, fgGradientAngle, bgGradientType, bgGradientAngle].forEach(el => {
+                el.addEventListener('input', () => {
+                    fgGradientAngleContainer.style.display = (fgGradientType.value === 'linear') ? 'block' : 'none';
+                    bgGradientAngleContainer.style.display = (bgGradientType.value === 'linear') ? 'block' : 'none';
+                    fgGradientAngleValue.textContent = fgGradientAngle.value;
+                    bgGradientAngleValue.textContent = bgGradientAngle.value;
+                    updateQRCode();
+                });
+            });
+
+            addFgColorBtn.addEventListener('click', () => addColorStop(fgColorStopsContainer, true));
+            addBgColorBtn.addEventListener('click', () => addColorStop(bgColorStopsContainer, false));
+
+            // Logo Events
+            logoSize.addEventListener('input', () => {
+                logoSizeValue.textContent = Math.round(parseFloat(logoSize.value) * 100);
+                updateQRCode();
+            });
+
+            logoUpload.addEventListener('change', (e) => {
+                if (e.target.files && e.target.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        logoImage = event.target.result;
+                        updateQRCode();
+                    };
+                    reader.readAsDataURL(e.target.files[0]);
+                } else {
+                    logoImage = null;
+                    updateQRCode();
+                }
+            });
+
+            removeBackground.addEventListener('change', updateQRCode);
+
+            // Action Buttons
+            downloadBtn.addEventListener('click', () => {
+                qrCode.download({ name: `qrcode-${Date.now()}`, extension: "png" });
+            });
+
+            resetGradientBtn.addEventListener('click', () => {
+                if (confirm("Reset all gradients to default?")) {
+                    resetGradient(true);  // Reset foreground
+                    resetGradient(false); // Reset background
+                    
+                    // Also reset to solid colors
+                    fgType.value = 'solid';
+                    fgSolidColor.style.display = 'block';
+                    fgGradientOptions.style.display = 'none';
+                    
+                    bgType.value = 'solid';
+                    bgSolidColor.style.display = 'block';
+                    bgGradientOptions.style.display = 'none';
+                    
+                    updateQRCode();
+                }
+            });
+
+            resetAllBtn.addEventListener('click', () => {
+                if (confirm("Reset all settings to default?")) {
+                    location.reload();
+                }
+            });
+
+            copyBtn.addEventListener('click', () => {
+                let colorCodes = "QR Code Color Codes:\n\n";
+                
+                // Get foreground colors
+                if (fgType.value === 'solid') {
+                    colorCodes += `Foreground: ${fgColor.value}\n`;
+                } else {
+                    const fgStops = getColorStops(fgColorStopsContainer);
+                    colorCodes += "Foreground Gradient:\n";
+                    fgStops.forEach((stop, index) => {
+                        const percentage = Math.round(stop.offset * 100);
+                        colorCodes += `  ${percentage}%: ${stop.color}\n`;
+                    });
+                }
+                
+                // Get background colors
+                if (bgType.value === 'solid') {
+                    colorCodes += `Background: ${bgColor.value}\n`;
+                } else {
+                    const bgStops = getColorStops(bgColorStopsContainer);
+                    colorCodes += "Background Gradient:\n";
+                    bgStops.forEach((stop, index) => {
+                        const percentage = Math.round(stop.offset * 100);
+                        colorCodes += `  ${percentage}%: ${stop.color}\n`;
+                    });
+                }
+                
+                navigator.clipboard.writeText(colorCodes).then(() => {
+                    const originalText = copyBtn.innerHTML;
+                    copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                    copyBtn.style.background = 'linear-gradient(135deg, #10b981, #34d399)';
+                    
+                    setTimeout(() => {
+                        copyBtn.innerHTML = originalText;
+                        copyBtn.style.background = '';
+                    }, 2000);
+                });
+            });
+
+            // --- Floating CTA Wave Animation ---
+            function addWaveAnimation() {
+                const waves = [];
+                
+                // Create 3 wave circles
+                for (let i = 0; i < 3; i++) {
+                    const wave = document.createElement('div');
+                    wave.className = 'wave-circle';
+                    wave.style.width = '60px';
+                    wave.style.height = '60px';
+                    wave.style.position = 'absolute';
+                    wave.style.top = '0';
+                    wave.style.left = '0';
+                    wave.style.animationDelay = `${i * 0.3}s`;
+                    floatingCta.appendChild(wave);
+                    waves.push(wave);
+                }
+                
+                return waves;
+            }
+
+            
+            // Initialize wave animation
+            const waveCircles = addWaveAnimation();
+            
+            // Floating CTA click handler
+            floatingCta.addEventListener('click', () => {
+                document.getElementById('mainToolCard').scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start'
+                });
+            });
+
+            // --- Scroll Animation for Feature Cards ---
+            function initializeScrollAnimation() {
+                const featureCards = document.querySelectorAll('.feature-card');
+                
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            // Add scroll-visible class when element comes into view
+                            entry.target.classList.add('scroll-visible');
+                            // Unobserve after animation to prevent re-triggering
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -50px 0px'
+                });
+                
+                // Observe each feature card
+                featureCards.forEach(card => {
+                    observer.observe(card);
+                });
+            }
+            
+            // --- Navigation Functionality ---
+            function initializeNavigation() {
+                // Smooth scrolling for navigation links
+                document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        const targetId = this.getAttribute('href');
+                        if (targetId === '#') return;
+                        
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            targetElement.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    });
+                });
+                
+                // Smooth scrolling for footer links
+                document.querySelectorAll('.footer-column a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        const targetId = this.getAttribute('href');
+                        if (targetId === '#') return;
+                        
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            targetElement.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    });
+                });
+            }
+            
+            // Initialize everything
+            initializeScrollAnimation();
+            initializeNavigation();
+            
+            // --- Initial Setup ---
+            // Create default color stops
+            fgColorStopsContainer.appendChild(createColorStop('#000000', true));
+            fgColorStopsContainer.appendChild(createColorStop('#2563eb', true));
+            
+            bgColorStopsContainer.appendChild(createColorStop('#ffffff', false));
+            bgColorStopsContainer.appendChild(createColorStop('#f8fafc', false));
+            
+            // Update percentages
+            updateColorPercentages(fgColorStopsContainer);
+            updateColorPercentages(bgColorStopsContainer);
+            
+            updateQRCode();
+        });
+    </script>
+</body>
+</html>
