@@ -1,4 +1,13 @@
-User-agent: *
+
+# Allow Google only
+User-agent: Googlebot
 Allow: /
+
+User-agent: Mediapartners-Google
+Allow: /
+
+# Block all other bots & AI crawlers
+User-agent: *
+Disallow: /
 
 Sitemap: https://algozencode.github.io/Qrgenaretor/sitemap.xml
